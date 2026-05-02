@@ -1,0 +1,128 @@
+plugins {
+    id 'net.neoforged.moddev' version '2.0.107'
+}
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+group   = 'com.minecolonies.compat.tfc'
+version = System.getenv('VERSION') ?: '1.0.0-indev'
+
+base {
+    archivesName = 'minecolonies-tfc-compat'
+}
+
+// Paths to local sibling projects.
+// Override in gradle.properties (or with -P flags) if your layout differs.
+def minecoloniesDir = findProperty('minecoloniesProjectDir') ?: '../minecolonies'
+def tfcDir          = findProperty('tfcProjectDir')          ?: '../TerraFirmaCraft'
+
+def mcLibsDir  = project.file("${minecoloniesDir}/build/libs")
+def tfcLibsDir = project.file("${tfcDir}/build/libs")
+
+// Read dependency versions directly from the sibling projects so this build stays
+// in sync automatically when they update.
+def mcProps = new Properties()
+project.file("${minecoloniesDir}/gradle.properties").withInputStream { mcProps.load(it) }
+
+// Patchouli version is declared inline in TerraFirmaCraft/build.gradle.kts.
+// Update this when TFC bumps the version there (search: val patchouliVersion).
+def patchouliVersion = '1.21.1-92-NEOFORGE'
+
+// Run `gradlew build` in each sibling project before running this one.
+// files(listFiles()) produces plain File objects — fileTree(dir:) passes a Map notation
+// that the NeoForge moddev plugin cannot resolve when building the compile classpath.
+def mcJars = files(mcLibsDir.listFiles()?.findAll { f ->
+    f.name.endsWith('.jar') &&
+    !f.name.contains('-sources') &&
+    !f.name.contains('-javadoc') &&
+    !f.name.contains('-slim') &&
+    !f.name.contains('-api')
+} ?: [])
+
+def tfcJars = files(tfcLibsDir.listFiles()?.findAll { f ->
+    f.name.endsWith('.jar') &&
+    !f.name.contains('-sources') &&
+    !f.name.contains('-javadoc')
+} ?: [])
+
+// Resolved mod JARs for companion mods that are required at runtime but not built locally.
+configurations {
+    runtimeMods {
+        canBeConsumed = false
+        canBeResolved = true
+        transitive = false
+    }
+}
+
+// Sync tasks copy all mod JARs into the game's mods/ folder before each run.
+// FML discovers mods by scanning that folder.
+def syncClientMods = tasks.register('syncClientMods', Sync) {
+    from mcJars, tfcJars, configurations.runtimeMods
+    into project.file('run/client/mods')
+}
+
+def syncServerMods = tasks.register('syncServerMods', Sync) {
+    from mcJars, tfcJars, configurations.runtimeMods
+    into project.file('run/server/mods')
+}
+
+repositories {
+    maven { url = 'https://ldtteam.jfrog.io/ldtteam/modding/' }
+    maven { url = 'https://maven.dries007.net/' }
+    maven { url = 'https://maven.blamejared.com' }   // patchouli
+    mavenLocal()
+}
+
+neoForge {
+    version = neoForgeVersion
+
+    runs {
+        configureEach {
+            logLevel = org.slf4j.event.Level.DEBUG
+        }
+        client {
+            client()
+            gameDirectory = project.file('run/client')
+            taskBefore syncClientMods
+        }
+        server {
+            server()
+            gameDirectory = project.file('run/server')
+            programArgument '--nogui'
+            taskBefore syncServerMods
+        }
+    }
+
+    mods {
+        create('minecolonies_tfc_compat') {
+            sourceSet sourceSets.main
+        }
+    }
+}
+
+dependencies {
+    // Compile against the local mod jars so the IDE and compiler can resolve imports.
+    compileOnly mcJars
+    compileOnly tfcJars
+
+    // MineColonies companion mods — versions sourced from minecolonies/gradle.properties.
+    runtimeMods "com.ldtteam:structurize:${mcProps.getProperty('structurize_version')}"
+    runtimeMods "com.ldtteam:blockui:${mcProps.getProperty('blockUI_version')}"
+    runtimeMods "com.ldtteam:domum-ornamentum:${mcProps.getProperty('domumOrnamentumVersion')}"
+    runtimeMods "com.ldtteam:multipiston:${mcProps.getProperty('multiPistonVersion')}"
+
+    // TFC companion mods — patchouliVersion declared above.
+    runtimeMods "vazkii.patchouli:Patchouli:${patchouliVersion}"
+}
+
+tasks.withType(ProcessResources).configureEach {
+    def replaceProperties = [
+        mod_version       : project.version,
+        neo_version_range : "[${neoForgeVersion},)",
+        minecraft_version : minecraftVersion,
+    ]
+    inputs.properties replaceProperties
+    filesMatching(['META-INF/neoforge.mods.toml']) {
+        expand replaceProperties
+    }
+}

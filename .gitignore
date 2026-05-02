@@ -1,0 +1,41 @@
+# IntelliJ IDEA
+/.idea/
+*.iml
+*.ipr
+*.iws
+/out/
+
+# Eclipse
+/bin/
+*.launch
+/.settings/
+/.metadata/
+/.classpath/
+/.project/
+/eclipse/
+
+# VS Code
+/.vscode/
+
+# Gradle
+/build/
+/.gradle/
+/libs/
+
+# NeoForge / Minecraft run directories
+/run/
+/runs/
+/runClient/
+/runServer/
+/runData/
+
+# Generated resources cache
+/src/generated/resources/.cache/**
+
+# Mac / Windows cruft
+**/.DS_Store
+**/Thumbs.db
+
+# Misc
+*.hprof
+.cache/

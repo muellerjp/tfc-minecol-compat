@@ -1,0 +1,72 @@
+name: Bug Report
+description: Something is not working correctly with the TFC/MineColonies compatibility.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Before filing a bug, make sure it only reproduces with this compat mod present.
+        If the issue also occurs without it, report it to MineColonies or TFC directly.
+
+  - type: input
+    id: mc_version
+    attributes:
+      label: Minecraft version
+      placeholder: "1.21.1"
+    validations:
+      required: true
+
+  - type: input
+    id: neoforge_version
+    attributes:
+      label: NeoForge version
+      placeholder: "21.1.xxx"
+    validations:
+      required: true
+
+  - type: input
+    id: minecolonies_version
+    attributes:
+      label: MineColonies version
+    validations:
+      required: true
+
+  - type: input
+    id: tfc_version
+    attributes:
+      label: TerraFirmaCraft version
+    validations:
+      required: true
+
+  - type: input
+    id: compat_version
+    attributes:
+      label: This compat mod version
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the bug
+      description: What did you expect to happen, and what happened instead?
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log output
+      description: Paste relevant lines from `latest.log` or a crash report.
+      render: text

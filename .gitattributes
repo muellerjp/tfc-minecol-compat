@@ -1,0 +1,6 @@
+# Mark generated JSON as linguist-generated so GitHub collapses diffs
+/src/generated/**/*.json linguist-generated=true
+
+# Normalise line endings for text files checked in to the repo
+* text=auto eol=lf
+*.bat text eol=crlf
