@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="LOGO1920x1080.png" alt="TerraFirmaPunk Minecolonies Compat">
+</p>
+
 # MineColonies × TerraFirmaCraft Compat
 
 A compatibility mod that makes [MineColonies](https://github.com/ldtteam/Minecolonies)
@@ -87,13 +91,13 @@ Fisher → fishing rod, Herders → shears/sword).
 The Gradle setup includes pre-configured run tasks that launch Minecraft with all
 required mods loaded automatically.
 
-### Pointing to your sibling projects
+### Pointing to your local builds
 
-The build needs to know where your local MineColonies and TerraFirmaCraft checkouts
-are so it can pick up their built JARs.  The defaults are `../minecolonies` and
-`../TerraFirmaCraft` (siblings of this folder).
+This mod compiles against a locally built MineColonies that contains the
+`Compatibility` hooks it uses.  You must tell the build where your checkouts
+live — there are no default paths.
 
-If your layout differs, pass the paths via `-P` flags:
+Pass them as `-P` flags on every command:
 
 ```bash
 ./gradlew runClient \
@@ -101,12 +105,11 @@ If your layout differs, pass the paths via `-P` flags:
   -PtfcProjectDir=C:/path/to/TerraFirmaCraft
 ```
 
-Or set them permanently by uncommenting and editing these lines in
-`gradle.properties`:
+Or set them permanently in `gradle.properties` (already present as comments):
 
 ```properties
-minecoloniesProjectDir=../minecolonies
-tfcProjectDir=../TerraFirmaCraft
+minecoloniesProjectDir=C:/path/to/minecolonies
+tfcProjectDir=C:/path/to/TerraFirmaCraft
 ```
 
 ### Prerequisites
@@ -114,8 +117,8 @@ tfcProjectDir=../TerraFirmaCraft
 Build the sibling projects once (only needed again when their code changes):
 
 ```bash
-cd ../minecolonies      && ./gradlew build
-cd ../TerraFirmaCraft   && ./gradlew build
+cd C:/path/to/minecolonies    && ./gradlew build
+cd C:/path/to/TerraFirmaCraft && ./gradlew build
 ```
 
 ### Running the client
@@ -153,15 +156,19 @@ dependency warnings in the console output.
 ## Building
 
 ```bash
-./gradlew build
+./gradlew build \
+  -PminecoloniesProjectDir=C:/path/to/minecolonies \
+  -PtfcProjectDir=C:/path/to/TerraFirmaCraft
 ```
 
 The output jar will be in `build/libs/`.
 
-> **Note:** This project compiles against local sibling builds of MineColonies and
-> TerraFirmaCraft.  Run `./gradlew build` in each sibling project first, then build
-> this one.  See `gradle.properties` to override the default `../minecolonies` and
-> `../TerraFirmaCraft` paths if your directory layout differs.
+Build the two sibling projects first if you haven't already:
+
+```bash
+cd C:/path/to/minecolonies    && ./gradlew build
+cd C:/path/to/TerraFirmaCraft && ./gradlew build
+```
 
 ## License
 
