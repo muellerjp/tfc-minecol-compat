@@ -5,6 +5,11 @@ on:
     tags:
       - 'v*'
 
+permissions:
+  contents: write
+  statuses: write
+  actions: write
+
 jobs:
   release:
     runs-on: ubuntu-latest
@@ -12,6 +17,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up JDK 21
         uses: actions/setup-java@v4
@@ -22,6 +29,15 @@ jobs:
       - name: Get version from tag
         id: version
         run: echo "version=${GITHUB_REF#refs/tags/v}" >> "$GITHUB_OUTPUT"
+
+      - name: Generate release notes
+        uses: orhun/git-cliff-action@v4
+        with:
+          config: cliff.toml
+          args: --verbose --current --strip all
+        env:
+          OUTPUT: RELEASE_NOTES.md
+          GITHUB_REPO: ${{ github.repository }}
 
       - name: Build
         uses: gradle/gradle-build-action@v3
@@ -50,4 +66,4 @@ jobs:
             neoforge
           game-versions: |
             1.21.1
-          changelog-file: CHANGELOG.md
+          changelog-file: RELEASE_NOTES.md
