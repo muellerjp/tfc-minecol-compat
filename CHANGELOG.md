@@ -1,9 +1,13 @@
-# Changelog
+## [unreleased]
 
-## [Unreleased]
+### 🐛 Bug Fixes
 
-### Added
-- Initial release.
-- Registers a MineColonies equipment level provider that maps TerraFirmaCraft tool
-  tiers to the correct 0–6 integer level using `LevelTier.level()` instead of
-  `getAttackDamageBonus()`, which TFC uses as a combat-damage multiplier.
+- *(docs)* Adding logo and readme
+- *(release)* Updating workflows
+- *(build)* Switching to open-minecolonies
+- *(api)* Upgrading to the newest open-minecolonies api for registering weapons
+## [0.1.0] - 2026-05-02
+
+### 🐛 Bug Fixes
+
+- *(release)* Adding rect and square logo and adding courseid to release workflow
