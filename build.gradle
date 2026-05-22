@@ -11,51 +11,64 @@ base {
     archivesName = 'minecolonies-tfc-compat'
 }
 
-// Paths to local sibling projects.
-// Override in gradle.properties (or with -P flags) if your layout differs.
-def minecoloniesDir = findProperty('minecoloniesProjectDir') ?: '../minecolonies'
-def tfcDir          = findProperty('tfcProjectDir')          ?: '../TerraFirmaCraft'
+// Paths to local sibling projects — supply via -P flags or gradle.properties.
+// When absent the build falls back to Maven artifacts for both mods.
+def minecoloniesDir = findProperty('minecoloniesProjectDir')
+def tfcDir          = findProperty('tfcProjectDir')
 
-def mcLibsDir  = project.file("${minecoloniesDir}/build/libs")
-def tfcLibsDir = project.file("${tfcDir}/build/libs")
+def mcLibsDir  = minecoloniesDir ? project.file("${minecoloniesDir}/build/libs") : null
+def tfcLibsDir = tfcDir          ? project.file("${tfcDir}/build/libs")          : null
 
-// Read dependency versions directly from the sibling projects so this build stays
-// in sync automatically when they update.
-def mcProps = new Properties()
-project.file("${minecoloniesDir}/gradle.properties").withInputStream { mcProps.load(it) }
+// ── Companion-version resolution ──────────────────────────────────────────────
+// Read companion-mod versions from the sibling minecolonies/gradle.properties so
+// this build stays in sync automatically when they update.
+// When that file is absent (standalone / CI build) we fall back to the values
+// declared in this project's own gradle.properties.
+def mcPropsFile    = minecoloniesDir ? project.file("${minecoloniesDir}/gradle.properties") : null
+def mcSiblingProps = new Properties()
+if (mcPropsFile?.exists()) {
+    mcPropsFile.withInputStream { mcSiblingProps.load(it) }
+}
+def resolveVersion = { String key ->
+    (mcSiblingProps.getProperty(key) ?: project.findProperty(key)) as String
+}
 
-// Patchouli version is declared inline in TerraFirmaCraft/build.gradle.kts.
-// Update this when TFC bumps the version there (search: val patchouliVersion).
-def patchouliVersion = '1.21.1-92-NEOFORGE'
+def patchouliVersion = project.findProperty('patchouliVersion') as String
 
-// Run `gradlew build` in each sibling project before running this one.
-// files(listFiles()) produces plain File objects — fileTree(dir:) passes a Map notation
-// that the NeoForge moddev plugin cannot resolve when building the compile classpath.
-def mcJars = files(mcLibsDir.listFiles()?.findAll { f ->
-    f.name.endsWith('.jar') &&
-    !f.name.contains('-sources') &&
-    !f.name.contains('-javadoc') &&
-    !f.name.contains('-slim') &&
-    !f.name.contains('-api')
-} ?: [])
+// ── Local jar detection ────────────────────────────────────────────────────────
+// Collect mod jars from each sibling project's build/libs directory.
+// Returns an empty list when the directory does not exist or has not been built yet.
+def collectJars = { File dir, List<String> excludeTokens ->
+    dir.exists() ? (dir.listFiles()?.findAll { f ->
+        f.name.endsWith('.jar') && excludeTokens.every { !f.name.contains(it) }
+    } ?: []) : []
+}
 
-def tfcJars = files(tfcLibsDir.listFiles()?.findAll { f ->
-    f.name.endsWith('.jar') &&
-    !f.name.contains('-sources') &&
-    !f.name.contains('-javadoc')
-} ?: [])
+def mcJarList  = mcLibsDir  ? collectJars(mcLibsDir,  ['-sources', '-javadoc', '-slim', '-api']) : []
+def tfcJarList = tfcLibsDir ? collectJars(tfcLibsDir, ['-sources', '-javadoc'])                  : []
+def mcJars     = files(mcJarList)
+def tfcJars    = files(tfcJarList)
 
-// Resolved mod JARs for companion mods that are required at runtime but not built locally.
+if (mcJarList.isEmpty()) {
+    logger.lifecycle('[compat] open-minecolonies local build not found — using GitHub release (open_minecolonies_version).')
+}
+if (tfcJarList.isEmpty()) {
+    logger.lifecycle('[compat] TerraFirmaCraft local build not found — using Maven artifact (tfc_maven_version).')
+}
+
+// ── Runtime-companion configuration ───────────────────────────────────────────
+// Holds jars that must be present in the game's mods/ folder at runtime but are
+// not part of the compile classpath and not published as dependencies of this mod.
 configurations {
     runtimeMods {
         canBeConsumed = false
         canBeResolved = true
-        transitive = false
+        transitive    = false
     }
 }
 
-// Sync tasks copy all mod JARs into the game's mods/ folder before each run.
-// FML discovers mods by scanning that folder.
+// Sync tasks copy all runtime mod jars into the game directory before each run.
+// FML discovers mods by scanning the mods/ folder.
 def syncClientMods = tasks.register('syncClientMods', Sync) {
     from mcJars, tfcJars, configurations.runtimeMods
     into project.file('run/client/mods')
@@ -66,14 +79,66 @@ def syncServerMods = tasks.register('syncServerMods', Sync) {
     into project.file('run/server/mods')
 }
 
+// ── open-minecolonies resolution ──────────────────────────────────────────────
+// Uses the GitHub Releases API so draft releases are accessible.
+// Set GITHUB_TOKEN (or GH_TOKEN) to access drafts; anonymous calls only see published releases.
+// Release tag format : omc-v<version>
+// Asset name format  : open-minecolonies-<version>.jar
+def openMcVersion  = project.findProperty('open_minecolonies_version') as String
+def openMcCacheJar = layout.buildDirectory.file("open-minecolonies-cache/open-minecolonies-${minecraftVersion}-${openMcVersion}.jar")
+
+tasks.register('resolveOpenMinecolonies') {
+    description = 'Downloads open-minecolonies from GitHub Releases (supports drafts via GITHUB_TOKEN).'
+    outputs.file openMcCacheJar
+    doLast {
+        def outFile = openMcCacheJar.get().asFile
+        def token   = System.getenv('GITHUB_TOKEN') ?: System.getenv('GH_TOKEN') ?: ''
+        def tag     = "omc-v${openMcVersion}"
+        def jarName = "open-minecolonies-${minecraftVersion}-${openMcVersion}.jar"
+
+        Closure<InputStream> apiGet = { String url, String accept ->
+            def conn = new URL(url).openConnection() as HttpURLConnection
+            conn.setRequestProperty('Accept', accept)
+            conn.setRequestProperty('X-GitHub-Api-Version', '2022-11-28')
+            if (token) conn.setRequestProperty('Authorization', "Bearer ${token}")
+            conn.instanceFollowRedirects = true
+            conn.connect()
+            if (conn.responseCode != 200)
+                throw new GradleException("[compat] GitHub API returned ${conn.responseCode} for ${url}")
+            conn.inputStream
+        }
+
+        def releases = new groovy.json.JsonSlurper()
+            .parse(apiGet('https://api.github.com/repos/muellerjp/minecolonies/releases', 'application/vnd.github+json'))
+        def release = releases.find { it.tag_name == tag }
+        if (!release)
+            throw new GradleException("[compat] No GitHub release found with tag '${tag}'.")
+
+        def asset = release.assets.find { it.name == jarName }
+        if (!asset)
+            throw new GradleException("[compat] Asset '${jarName}' not found in release '${tag}'.")
+
+        outFile.parentFile.mkdirs()
+        outFile.bytes = apiGet(
+            "https://api.github.com/repos/muellerjp/minecolonies/releases/assets/${asset.id}",
+            'application/octet-stream'
+        ).bytes
+        logger.lifecycle("[compat] Downloaded ${jarName} from release '${tag}'.")
+    }
+}
+
+def openMcFiles = files(openMcCacheJar).builtBy(tasks.named('resolveOpenMinecolonies'))
+
 repositories {
-    maven { url = 'https://ldtteam.jfrog.io/ldtteam/modding/' }
+    maven { url = 'https://ldtteam.jfrog.io/ldtteam/modding/' }  // structurize, blockui, domum-ornamentum, multipiston
     maven { url = 'https://maven.dries007.net/' }
-    maven { url = 'https://maven.blamejared.com' }   // patchouli
+    maven { url = 'https://maven.blamejared.com' }                // patchouli
+    maven { url = 'https://api.modrinth.com/maven' }              // tfc fallback (maven.modrinth group)
     mavenLocal()
 }
 
 neoForge {
+    // Declaring a version here also enables the additionalRuntimeClasspath configuration.
     version = neoForgeVersion
 
     runs {
@@ -101,17 +166,38 @@ neoForge {
 }
 
 dependencies {
-    // Compile against the local mod jars so the IDE and compiler can resolve imports.
-    compileOnly mcJars
-    compileOnly tfcJars
+    // ── MineColonies ───────────────────────────────────────────────────────────
+    // Local build takes priority; Maven artifact used when it is absent.
+    // The Maven artifact is also added to runtimeMods so runClient/runServer
+    // still work in standalone mode.
+    if (!mcJarList.isEmpty()) {
+        compileOnly mcJars
+    } else {
+        compileOnly openMcFiles
+        runtimeMods openMcFiles
+    }
 
-    // MineColonies companion mods — versions sourced from minecolonies/gradle.properties.
-    runtimeMods "com.ldtteam:structurize:${mcProps.getProperty('structurize_version')}"
-    runtimeMods "com.ldtteam:blockui:${mcProps.getProperty('blockUI_version')}"
-    runtimeMods "com.ldtteam:domum-ornamentum:${mcProps.getProperty('domumOrnamentumVersion')}"
-    runtimeMods "com.ldtteam:multipiston:${mcProps.getProperty('multiPistonVersion')}"
+    // ── TerraFirmaCraft ────────────────────────────────────────────────────────
+    // TFC does not publish to a traditional Maven repo.  When the local build is
+    // absent we fall back to the Modrinth Maven using the Modrinth version-id
+    // stored in tfc_maven_version (gradle.properties).
+    if (!tfcJarList.isEmpty()) {
+        compileOnly tfcJars
+    } else {
+        def v = project.findProperty('tfc_maven_version') as String
+        compileOnly "maven.modrinth:terrafirmacraft:${v}"
+        runtimeMods "maven.modrinth:terrafirmacraft:${v}"
+    }
 
-    // TFC companion mods — patchouliVersion declared above.
+    // ── MineColonies companion mods ────────────────────────────────────────────
+    // Versions are read from minecolonies/gradle.properties when available,
+    // otherwise from this project's own gradle.properties (see fallbacks below).
+    runtimeMods "com.ldtteam:structurize:${resolveVersion('structurize_version')}"
+    runtimeMods "com.ldtteam:blockui:${resolveVersion('blockUI_version')}"
+    runtimeMods "com.ldtteam:domum-ornamentum:${resolveVersion('domumOrnamentumVersion')}"
+    runtimeMods "com.ldtteam:multipiston:${resolveVersion('multiPistonVersion')}"
+
+    // ── TFC companion mods ─────────────────────────────────────────────────────
     runtimeMods "vazkii.patchouli:Patchouli:${patchouliVersion}"
 }
 
