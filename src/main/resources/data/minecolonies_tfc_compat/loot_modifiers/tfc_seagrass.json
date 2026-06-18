@@ -1,0 +1,20 @@
+{
+  "neoforge:conditions": [
+    {"type": "neoforge:mod_loaded", "modid": "minecolonies"},
+    {"type": "neoforge:mod_loaded", "modid": "tfc"}
+  ],
+  "type": "neoforge:add_table",
+  "conditions": [
+    {
+      "condition": "minecraft:any_of",
+      "terms": [
+        {"condition": "neoforge:loot_table_id", "loot_table_id": "tfc:blocks/plant/manatee_grass"},
+        {"condition": "neoforge:loot_table_id", "loot_table_id": "tfc:blocks/plant/star_grass"},
+        {"condition": "neoforge:loot_table_id", "loot_table_id": "tfc:blocks/plant/turtle_grass"},
+        {"condition": "neoforge:loot_table_id", "loot_table_id": "tfc:blocks/plant/coontail"},
+        {"condition": "neoforge:loot_table_id", "loot_table_id": "tfc:blocks/plant/eel_grass"}
+      ]
+    }
+  ],
+  "table": "minecolonies_tfc_compat:crops/blocks/seagrass"
+}

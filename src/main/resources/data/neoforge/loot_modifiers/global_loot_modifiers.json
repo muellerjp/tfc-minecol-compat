@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "entries": [
+    "minecolonies_tfc_compat:tfc_short_grass",
+    "minecolonies_tfc_compat:tfc_tall_grass",
+    "minecolonies_tfc_compat:tfc_fern",
+    "minecolonies_tfc_compat:tfc_dead_bush",
+    "minecolonies_tfc_compat:tfc_seagrass"
+  ]
+}

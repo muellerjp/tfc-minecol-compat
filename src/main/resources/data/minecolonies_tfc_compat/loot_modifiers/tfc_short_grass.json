@@ -1,0 +1,25 @@
+{
+  "neoforge:conditions": [
+    {"type": "neoforge:mod_loaded", "modid": "minecolonies"},
+    {"type": "neoforge:mod_loaded", "modid": "tfc"}
+  ],
+  "type": "neoforge:add_table",
+  "conditions": [
+    {
+      "condition": "minecraft:any_of",
+      "terms": [
+        {"condition": "neoforge:loot_table_id", "loot_table_id": "tfc:blocks/plant/bluegrass"},
+        {"condition": "neoforge:loot_table_id", "loot_table_id": "tfc:blocks/plant/bromegrass"},
+        {"condition": "neoforge:loot_table_id", "loot_table_id": "tfc:blocks/plant/fountain_grass"},
+        {"condition": "neoforge:loot_table_id", "loot_table_id": "tfc:blocks/plant/orchard_grass"},
+        {"condition": "neoforge:loot_table_id", "loot_table_id": "tfc:blocks/plant/ryegrass"},
+        {"condition": "neoforge:loot_table_id", "loot_table_id": "tfc:blocks/plant/scutch_grass"},
+        {"condition": "neoforge:loot_table_id", "loot_table_id": "tfc:blocks/plant/timothy_grass"},
+        {"condition": "neoforge:loot_table_id", "loot_table_id": "tfc:blocks/plant/raddia_grass"},
+        {"condition": "neoforge:loot_table_id", "loot_table_id": "tfc:blocks/plant/red_oat_grass"},
+        {"condition": "neoforge:loot_table_id", "loot_table_id": "tfc:blocks/plant/beachgrass"}
+      ]
+    }
+  ],
+  "table": "minecolonies_tfc_compat:crops/blocks/short_grass"
+}

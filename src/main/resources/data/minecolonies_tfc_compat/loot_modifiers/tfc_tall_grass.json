@@ -1,0 +1,28 @@
+{
+  "neoforge:conditions": [
+    {"type": "neoforge:mod_loaded", "modid": "minecolonies"},
+    {"type": "neoforge:mod_loaded", "modid": "tfc"}
+  ],
+  "type": "neoforge:add_table",
+  "conditions": [
+    {
+      "condition": "minecraft:any_of",
+      "terms": [
+        {"condition": "neoforge:loot_table_id", "loot_table_id": "tfc:blocks/plant/pampas_grass"},
+        {"condition": "neoforge:loot_table_id", "loot_table_id": "tfc:blocks/plant/rose"},
+        {"condition": "neoforge:loot_table_id", "loot_table_id": "tfc:blocks/plant/bear_grass"},
+        {"condition": "neoforge:loot_table_id", "loot_table_id": "tfc:blocks/plant/king_fern"},
+        {"condition": "neoforge:loot_table_id", "loot_table_id": "tfc:blocks/plant/ostrich_fern"},
+        {"condition": "neoforge:loot_table_id", "loot_table_id": "tfc:blocks/plant/lilac"},
+        {"condition": "neoforge:loot_table_id", "loot_table_id": "tfc:blocks/plant/fan_palm"},
+        {"condition": "neoforge:loot_table_id", "loot_table_id": "tfc:blocks/plant/sapphire_tower"},
+        {"condition": "neoforge:loot_table_id", "loot_table_id": "tfc:blocks/plant/toquilla_palm"},
+        {"condition": "neoforge:loot_table_id", "loot_table_id": "tfc:blocks/plant/tall_fescue_grass"},
+        {"condition": "neoforge:loot_table_id", "loot_table_id": "tfc:blocks/plant/switchgrass"},
+        {"condition": "neoforge:loot_table_id", "loot_table_id": "tfc:blocks/plant/sunflower"},
+        {"condition": "neoforge:loot_table_id", "loot_table_id": "tfc:blocks/plant/red_sealing_wax_palm"}
+      ]
+    }
+  ],
+  "table": "minecolonies_tfc_compat:crops/blocks/tall_grass"
+}

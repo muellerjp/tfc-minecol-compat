@@ -1,0 +1,17 @@
+{
+  "neoforge:conditions": [
+    {"type": "neoforge:mod_loaded", "modid": "minecolonies"},
+    {"type": "neoforge:mod_loaded", "modid": "tfc"}
+  ],
+  "type": "neoforge:add_table",
+  "conditions": [
+    {
+      "condition": "minecraft:any_of",
+      "terms": [
+        {"condition": "neoforge:loot_table_id", "loot_table_id": "tfc:blocks/plant/dead_bush"},
+        {"condition": "neoforge:loot_table_id", "loot_table_id": "tfc:blocks/plant/dry_grass"}
+      ]
+    }
+  ],
+  "table": "minecolonies_tfc_compat:crops/blocks/dead_bush"
+}

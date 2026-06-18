@@ -1,0 +1,22 @@
+{
+  "replace": false,
+  "values": [
+    "tfc:mud_flats",
+    "tfc:salt_marsh",
+    "tfc:tidal_flats",
+    "tfc:lake",
+    "tfc:river",
+    "tfc:mountain_lake",
+    "tfc:old_mountain_lake",
+    "tfc:oceanic_mountain_lake",
+    "tfc:volcanic_mountain_lake",
+    "tfc:volcanic_oceanic_mountain_lake",
+    "tfc:plateau_lake",
+    "tfc:cenote_plains",
+    "tfc:cenote_hills",
+    "tfc:cenote_rolling_hills",
+    "tfc:cenote_canyons",
+    "tfc:cenote_highlands",
+    "tfc:cenote_plateau"
+  ]
+}

@@ -1,6 +1,7 @@
 package com.minecolonies.compat.tfc;
 
 import com.minecolonies.api.compatibility.Compatibility;
+import com.minecolonies.compat.tfc.loot.TFCCompatLootConditions;
 import net.dries007.tfc.common.LevelTier;
 import net.dries007.tfc.common.items.JavelinItem;
 import net.dries007.tfc.common.items.TFCItems;
@@ -20,6 +21,7 @@ public class TFCMineColoniesCompat
 
     public TFCMineColoniesCompat(final IEventBus modEventBus)
     {
+        TFCCompatLootConditions.REGISTER.register(modEventBus);
         modEventBus.addListener(this::onCommonSetup);
     }
 
