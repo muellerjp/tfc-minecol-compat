@@ -167,6 +167,9 @@ neoForge {
 }
 
 dependencies {
+    // Mixin annotation processor — generates refmaps at compile time for @Mixin classes
+    annotationProcessor "org.spongepowered:mixin:0.8.5:processor"
+
     // ── MineColonies ───────────────────────────────────────────────────────────
     // Local build takes priority; Maven artifact used when it is absent.
     // The Maven artifact is also added to runtimeMods so runClient/runServer

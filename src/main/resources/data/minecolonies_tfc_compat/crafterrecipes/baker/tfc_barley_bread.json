@@ -1,0 +1,14 @@
+{
+  "type": "recipe",
+  "crafter": "baker_crafting",
+  "inputs": [
+    {
+      "count": 4,
+      "id": "tfc:food/barley_grain"
+    }
+  ],
+  "intermediate": "minecraft:air",
+  "result": {
+    "id": "tfc:food/barley_bread"
+  }
+}

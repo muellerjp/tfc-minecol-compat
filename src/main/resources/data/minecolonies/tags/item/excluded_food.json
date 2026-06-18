@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "#c:foods/grain",
+    "#c:foods/flour",
+    "#c:foods/dough",
+    "#minecolonies:raw_meat"
+  ]
+}

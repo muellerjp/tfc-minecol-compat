@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": { "item": "tfc:food/camelidae" },
+  "result": { "id": "tfc:food/cooked_camelidae" },
+  "experience": 0.35,
+  "cookingtime": 200
+}

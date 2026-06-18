@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": { "item": "tfc:food/grouse" },
+  "result": { "id": "tfc:food/cooked_grouse" },
+  "experience": 0.35,
+  "cookingtime": 200
+}

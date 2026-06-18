@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": { "item": "tfc:food/lake_trout" },
+  "result": { "id": "tfc:food/cooked_lake_trout" },
+  "experience": 0.35,
+  "cookingtime": 200
+}

@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": { "item": "tfc:food/shellfish" },
+  "result": { "id": "tfc:food/cooked_shellfish" },
+  "experience": 0.35,
+  "cookingtime": 200
+}

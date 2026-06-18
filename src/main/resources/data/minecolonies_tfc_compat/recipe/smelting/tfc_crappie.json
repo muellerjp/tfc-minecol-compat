@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": { "item": "tfc:food/crappie" },
+  "result": { "id": "tfc:food/cooked_crappie" },
+  "experience": 0.35,
+  "cookingtime": 200
+}

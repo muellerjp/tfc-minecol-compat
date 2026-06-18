@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": { "item": "tfc:food/beef" },
+  "result": { "id": "tfc:food/cooked_beef" },
+  "experience": 0.35,
+  "cookingtime": 200
+}

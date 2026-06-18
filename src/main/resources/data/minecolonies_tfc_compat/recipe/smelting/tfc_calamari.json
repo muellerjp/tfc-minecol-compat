@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": { "item": "tfc:food/calamari" },
+  "result": { "id": "tfc:food/cooked_calamari" },
+  "experience": 0.35,
+  "cookingtime": 200
+}

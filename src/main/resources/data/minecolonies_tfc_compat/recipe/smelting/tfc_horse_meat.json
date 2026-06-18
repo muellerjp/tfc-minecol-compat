@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": { "item": "tfc:food/horse_meat" },
+  "result": { "id": "tfc:food/cooked_horse_meat" },
+  "experience": 0.35,
+  "cookingtime": 200
+}

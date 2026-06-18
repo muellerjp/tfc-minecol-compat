@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": { "item": "tfc:food/bluegill" },
+  "result": { "id": "tfc:food/cooked_bluegill" },
+  "experience": 0.35,
+  "cookingtime": 200
+}

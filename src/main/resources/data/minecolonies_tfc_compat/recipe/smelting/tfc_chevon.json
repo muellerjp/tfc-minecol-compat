@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": { "item": "tfc:food/chevon" },
+  "result": { "id": "tfc:food/cooked_chevon" },
+  "experience": 0.35,
+  "cookingtime": 200
+}

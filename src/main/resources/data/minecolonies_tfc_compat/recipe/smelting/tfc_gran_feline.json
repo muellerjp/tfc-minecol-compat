@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": { "item": "tfc:food/gran_feline" },
+  "result": { "id": "tfc:food/cooked_gran_feline" },
+  "experience": 0.35,
+  "cookingtime": 200
+}

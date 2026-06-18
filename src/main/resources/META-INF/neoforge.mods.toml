@@ -35,3 +35,6 @@ license = "MIT"
     versionRange = "[*,)"
     ordering = "AFTER"
     side = "BOTH"
+
+[[mixins]]
+    config = "minecolonies_tfc_compat.mixins.json"

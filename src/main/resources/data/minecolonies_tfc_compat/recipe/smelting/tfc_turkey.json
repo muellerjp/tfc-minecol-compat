@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": { "item": "tfc:food/turkey" },
+  "result": { "id": "tfc:food/cooked_turkey" },
+  "experience": 0.35,
+  "cookingtime": 200
+}

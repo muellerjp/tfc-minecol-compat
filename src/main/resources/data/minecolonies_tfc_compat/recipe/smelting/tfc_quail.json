@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": { "item": "tfc:food/quail" },
+  "result": { "id": "tfc:food/cooked_quail" },
+  "experience": 0.35,
+  "cookingtime": 200
+}

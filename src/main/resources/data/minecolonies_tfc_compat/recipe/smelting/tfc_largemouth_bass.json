@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": { "item": "tfc:food/largemouth_bass" },
+  "result": { "id": "tfc:food/cooked_largemouth_bass" },
+  "experience": 0.35,
+  "cookingtime": 200
+}

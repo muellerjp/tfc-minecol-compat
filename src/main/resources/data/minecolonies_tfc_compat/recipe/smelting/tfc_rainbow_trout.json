@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": { "item": "tfc:food/rainbow_trout" },
+  "result": { "id": "tfc:food/cooked_rainbow_trout" },
+  "experience": 0.35,
+  "cookingtime": 200
+}
