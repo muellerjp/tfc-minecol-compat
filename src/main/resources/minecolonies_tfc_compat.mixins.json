@@ -4,7 +4,8 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "ItemStackUtilsMixin",
-    "FoodUtilsMixin"
+    "FoodUtilsMixin",
+    "TreeMixin"
   ],
   "injectors": {
     "defaultRequire": 1
