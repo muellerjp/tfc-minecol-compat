@@ -1,9 +1,18 @@
 ## [unreleased]
 
+### 🐛 Bug Fixes
+
+- *(forester)* The forester now correctly identifies trees and also mines the wood blocks
+## [0.1.2] - 2026-06-18
+
 ### 🚀 Features
 
 - *(minecolonies)* Make minecolonies crops harvestable in tfc worlds
 - *(food)* Make tfc foods available to eat for colonists; added mixin to allow bakery, cook and dining hall accept tfc food.
+
+### ⚙️ Miscellaneous Tasks
+
+- *(changelog)* Update CHANGELOG.md
 ## [0.1.1] - 2026-05-22
 
 ### 🐛 Bug Fixes
