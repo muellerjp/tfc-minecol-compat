@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:fishing",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "rolls": 1.0,
+      "entries": [
+        {"type": "minecraft:item", "name": "tfc:food/cod", "weight": 15},
+        {"type": "minecraft:item", "name": "tfc:food/salmon", "weight": 12},
+        {"type": "minecraft:item", "name": "tfc:food/bluegill", "weight": 10},
+        {"type": "minecraft:item", "name": "tfc:food/crappie", "weight": 10},
+        {"type": "minecraft:item", "name": "tfc:food/lake_trout", "weight": 8},
+        {"type": "minecraft:item", "name": "tfc:food/rainbow_trout", "weight": 8},
+        {"type": "minecraft:item", "name": "tfc:food/largemouth_bass", "weight": 8},
+        {"type": "minecraft:item", "name": "tfc:food/smallmouth_bass", "weight": 8},
+        {"type": "minecraft:item", "name": "tfc:food/arctic_char", "weight": 6},
+        {"type": "minecraft:item", "name": "tfc:food/burbot", "weight": 6},
+        {"type": "minecraft:item", "name": "tfc:food/muksun", "weight": 6},
+        {"type": "minecraft:item", "name": "tfc:food/northern_pike", "weight": 6},
+        {"type": "minecraft:item", "name": "tfc:food/spotted_gudgeon", "weight": 6},
+        {"type": "minecraft:item", "name": "tfc:food/tilapia", "weight": 6},
+        {"type": "minecraft:item", "name": "tfc:food/pacu", "weight": 5},
+        {"type": "minecraft:item", "name": "tfc:food/peacock_bass", "weight": 5},
+        {"type": "minecraft:item", "name": "tfc:food/shellfish", "weight": 4},
+        {"type": "minecraft:item", "name": "tfc:food/red_piranha", "weight": 4},
+        {"type": "minecraft:item", "name": "tfc:food/calamari", "weight": 3},
+        {"type": "minecraft:item", "name": "tfc:food/tropical_fish", "weight": 3}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:fishing",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "rolls": 1.0,
+      "entries": [
+        {"type": "minecraft:item", "name": "tfc:groundcover/sea_urchin", "quality": 1, "weight": 1},
+        {"type": "minecraft:item", "name": "tfc:groundcover/clam", "quality": 1, "weight": 25},
+        {"type": "minecraft:item", "name": "tfc:groundcover/mussel", "quality": 1, "weight": 25},
+        {"type": "minecraft:empty", "weight": 949}
+      ]
+    }
+  ]
+}

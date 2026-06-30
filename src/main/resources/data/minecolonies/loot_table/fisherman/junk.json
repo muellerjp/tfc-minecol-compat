@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:fishing",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "rolls": 1.0,
+      "entries": [
+        {"type": "minecraft:item", "name": "tfc:groundcover/driftwood", "weight": 10},
+        {"type": "minecraft:item", "name": "tfc:groundcover/seaweed", "weight": 10},
+        {"type": "minecraft:item", "name": "minecraft:stick", "weight": 10},
+        {"type": "minecraft:item", "name": "tfc:groundcover/pinecone", "weight": 8},
+        {"type": "minecraft:item", "name": "minecraft:bone", "weight": 6},
+        {"type": "minecraft:item", "name": "minecraft:flint", "weight": 6},
+        {"type": "minecraft:item", "name": "minecraft:rotten_flesh", "weight": 6},
+        {"type": "minecraft:item", "name": "tfc:groundcover/guano", "weight": 4}
+      ]
+    }
+  ]
+}

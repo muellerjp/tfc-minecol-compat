@@ -5,7 +5,12 @@
   "mixins": [
     "ItemStackUtilsMixin",
     "FoodUtilsMixin",
-    "TreeMixin"
+    "TreeMixin",
+    "BuildingFishermanMixin",
+    "EntityAIWorkFishermanMixin",
+    "PathfindingUtilsMixin",
+    "PondMixin",
+    "NewBobberEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1
