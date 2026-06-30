@@ -1,8 +1,17 @@
 ## [unreleased]
 
+### 🚀 Features
+
+- *(fisher)* Adapt the fishermans ai and loot tables to be tfc compatible
+## [0.1.3] - 2026-06-19
+
 ### 🐛 Bug Fixes
 
 - *(forester)* The forester now correctly identifies trees and also mines the wood blocks
+
+### ⚙️ Miscellaneous Tasks
+
+- *(changelog)* Update CHANGELOG.md
 ## [0.1.2] - 2026-06-18
 
 ### 🚀 Features
