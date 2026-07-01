@@ -1,8 +1,17 @@
 ## [unreleased]
 
+### 🐛 Bug Fixes
+
+- *(fisher)* Fixing the fisherman wroking with tfc water
+## [0.1.4] - 2026-06-30
+
 ### 🚀 Features
 
 - *(fisher)* Adapt the fishermans ai and loot tables to be tfc compatible
+
+### ⚙️ Miscellaneous Tasks
+
+- *(changelog)* Update CHANGELOG.md
 ## [0.1.3] - 2026-06-19
 
 ### 🐛 Bug Fixes
