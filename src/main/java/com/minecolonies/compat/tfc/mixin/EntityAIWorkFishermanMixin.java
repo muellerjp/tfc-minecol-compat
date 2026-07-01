@@ -1,14 +1,15 @@
 package com.minecolonies.compat.tfc.mixin;
 
+import com.minecolonies.api.colony.buildings.IBuilding;
 import com.minecolonies.api.entity.ai.statemachine.states.AIWorkerState;
 import com.minecolonies.api.entity.ai.statemachine.states.IAIState;
 import com.minecolonies.api.entity.citizen.AbstractEntityCitizen;
-import com.minecolonies.api.inventory.InventoryCitizen;
 import com.minecolonies.api.util.InventoryUtils;
 import com.minecolonies.api.util.ItemStackUtils;
 import com.minecolonies.api.util.Utils;
+import com.minecolonies.compat.tfc.MinecoloniesAccess;
 import com.minecolonies.compat.tfc.TFCFishingHelper;
-import com.minecolonies.core.colony.buildings.AbstractBuilding;
+import com.minecolonies.core.entity.ai.workers.AbstractEntityAIBasic;
 import com.minecolonies.core.entity.ai.workers.production.agriculture.EntityAIWorkFisherman;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
@@ -40,25 +41,19 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * <h3>Water detection</h3>
  * {@code isReadyToFish} only accepts proximity to vanilla {@code Blocks.WATER}; the redirect also
  * accepts TFC infinite water so the citizen casts next to TFC salt-water oceans.
+ *
+ * <h3>Accessing MineColonies internals</h3>
+ * Only {@code playNeedRodSound()} is declared on {@code EntityAIWorkFisherman} itself, so it is the
+ * one member we can {@code @Shadow}. Everything else is inherited from the AI superclasses, and
+ * Mixin cannot attach inherited {@code @Shadow} members in this environment (it crashes mod load).
+ * We therefore reach them without shadowing: the public {@code building} field and the
+ * {@code checkIfRequestForItemExistOrCreate}/{@code getState} methods via a runtime
+ * {@link AbstractEntityAIBasic} cast (resolved by the JVM, not Mixin), and the {@code protected}
+ * {@code worker} field via {@link MinecoloniesAccess}.
  */
 @Mixin(value = EntityAIWorkFisherman.class, remap = false)
 public abstract class EntityAIWorkFishermanMixin
 {
-    @Shadow
-    protected AbstractEntityCitizen worker;
-
-    @Shadow
-    public AbstractBuilding building;
-
-    @Shadow
-    protected abstract InventoryCitizen getInventory();
-
-    @Shadow
-    public abstract boolean checkIfRequestForItemExistOrCreate(ItemStack stack, int count, int minCount, boolean matchNBT, boolean async);
-
-    @Shadow
-    public abstract IAIState getState();
-
     @Shadow
     private void playNeedRodSound() { throw new AssertionError(); }
 
@@ -68,10 +63,12 @@ public abstract class EntityAIWorkFishermanMixin
     @Inject(method = "prepareForFishing", at = @At("HEAD"), cancellable = true, remap = false)
     private void tfc$prepareForFishing(final CallbackInfoReturnable<IAIState> cir)
     {
-        final int level = building.getBuildingLevel();
+        final AbstractEntityAIBasic<?, ?> ai = (AbstractEntityAIBasic<?, ?>) (Object) this;
+        final AbstractEntityCitizen worker = MinecoloniesAccess.worker(this);
+        final int level = ((IBuilding) ai.building).getBuildingLevel();
         // Item-only match (matchNBT = false) so a damaged or bait-bearing rod still counts; this
         // also pulls the rod from the hut into the citizen, or raises a single Stack request for it.
-        if (checkIfRequestForItemExistOrCreate(TFCFishingHelper.rodStackForLevel(level), 1, 1, false, false))
+        if (ai.checkIfRequestForItemExistOrCreate(TFCFishingHelper.rodStackForLevel(level), 1, 1, false, false))
         {
             cir.setReturnValue(AIWorkerState.FISHERMAN_WALKING_TO_WATER);
             return;
@@ -79,7 +76,7 @@ public abstract class EntityAIWorkFishermanMixin
 
         worker.setItemInHand(InteractionHand.MAIN_HAND, ItemStackUtils.EMPTY);
         playNeedRodSound();
-        cir.setReturnValue(getState());
+        cir.setReturnValue(ai.getState());
     }
 
     /**
@@ -88,9 +85,11 @@ public abstract class EntityAIWorkFishermanMixin
     @Inject(method = "getRodSlot", at = @At("HEAD"), cancellable = true, remap = false)
     private void tfc$getRodSlot(final CallbackInfoReturnable<Integer> cir)
     {
-        final int level = building.getBuildingLevel();
+        final AbstractEntityAIBasic<?, ?> ai = (AbstractEntityAIBasic<?, ?>) (Object) this;
+        final int level = ((IBuilding) ai.building).getBuildingLevel();
         cir.setReturnValue(InventoryUtils.findFirstSlotInItemHandlerWith(
-            getInventory(), stack -> TFCFishingHelper.isRodForLevel(stack, level)));
+            MinecoloniesAccess.worker(this).getInventoryCitizen(),
+            stack -> TFCFishingHelper.isRodForLevel(stack, level)));
     }
 
     /**
@@ -99,9 +98,11 @@ public abstract class EntityAIWorkFishermanMixin
     @Inject(method = "hasRodButNotEquipped", at = @At("HEAD"), cancellable = true, remap = false)
     private void tfc$hasRodButNotEquipped(final CallbackInfoReturnable<Boolean> cir)
     {
-        final int level = building.getBuildingLevel();
+        final AbstractEntityAIBasic<?, ?> ai = (AbstractEntityAIBasic<?, ?>) (Object) this;
+        final AbstractEntityCitizen worker = MinecoloniesAccess.worker(this);
+        final int level = ((IBuilding) ai.building).getBuildingLevel();
         final boolean inInventory = InventoryUtils.findFirstSlotInItemHandlerWith(
-            getInventory(), stack -> TFCFishingHelper.isRodForLevel(stack, level)) != -1;
+            worker.getInventoryCitizen(), stack -> TFCFishingHelper.isRodForLevel(stack, level)) != -1;
         final ItemStack main = worker.getMainHandItem();
         cir.setReturnValue(inInventory && (main == null || !TFCFishingHelper.isRodForLevel(main, level)));
     }
