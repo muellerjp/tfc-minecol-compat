@@ -2,7 +2,17 @@
 
 ### 🐛 Bug Fixes
 
+- *(build)* Fixing encoding issues
+- *(balancing)* Found the issue with minecolonie crop loot tables. is now changed to <= 1 crop per plant with a chance betweem 0.5 and 3%
+## [0.1.5] - 2026-07-01
+
+### 🐛 Bug Fixes
+
 - *(fisher)* Fixing the fisherman wroking with tfc water
+
+### ⚙️ Miscellaneous Tasks
+
+- *(changelog)* Update CHANGELOG.md
 ## [0.1.4] - 2026-06-30
 
 ### 🚀 Features
