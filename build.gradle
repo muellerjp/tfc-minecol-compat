@@ -216,3 +216,9 @@ tasks.withType(ProcessResources).configureEach {
         expand replaceProperties
     }
 }
+
+// Source files are UTF-8 (they contain characters like '←' in comments); without this
+// javac falls back to the platform default (e.g. windows-1252) and fails to compile.
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
