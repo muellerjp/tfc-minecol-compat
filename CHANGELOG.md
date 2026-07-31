@@ -4,6 +4,11 @@
 
 - *(build)* Fixing encoding issues
 - *(balancing)* Found the issue with minecolonie crop loot tables. is now changed to <= 1 crop per plant with a chance betweem 0.5 and 3%
+- *(worldgen)* Disabling ships and empty colonies from being generated in the world
+
+### ⚙️ Miscellaneous Tasks
+
+- *(changelog)* Update CHANGELOG.md
 ## [0.1.5] - 2026-07-01
 
 ### 🐛 Bug Fixes
