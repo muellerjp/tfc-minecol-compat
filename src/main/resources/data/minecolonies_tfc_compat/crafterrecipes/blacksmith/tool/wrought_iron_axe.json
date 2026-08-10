@@ -1,0 +1,19 @@
+{
+  "type": "recipe",
+  "crafter": "blacksmith_crafting",
+  "inputs": [
+    {
+      "id": "tfc:metal/axe_head/wrought_iron",
+      "matchType": "ignore"
+    },
+    {
+      "id": "minecraft:stick",
+      "matchType": "ignore"
+    }
+  ],
+  "intermediate": "minecraft:air",
+  "min-building-level": 3,
+  "result": {
+    "id": "tfc:metal/axe/wrought_iron"
+  }
+}

@@ -10,7 +10,8 @@
     "EntityAIWorkFishermanMixin",
     "PathfindingUtilsMixin",
     "PondMixin",
-    "NewBobberEntityMixin"
+    "NewBobberEntityMixin",
+    "AbstractCraftingBuildingModuleMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -1,0 +1,19 @@
+{
+  "type": "recipe",
+  "crafter": "blacksmith_crafting",
+  "inputs": [
+    {
+      "id": "tfc:metal/hoe_head/copper",
+      "matchType": "ignore"
+    },
+    {
+      "id": "minecraft:stick",
+      "matchType": "ignore"
+    }
+  ],
+  "intermediate": "minecraft:air",
+  "min-building-level": 1,
+  "result": {
+    "id": "tfc:metal/hoe/copper"
+  }
+}

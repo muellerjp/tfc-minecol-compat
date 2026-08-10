@@ -1,0 +1,16 @@
+{
+  "type": "recipe",
+  "crafter": "blacksmith_crafting",
+  "inputs": [
+    {
+      "id": "tfc:metal/ingot/black_steel",
+      "matchType": "ignore"
+    }
+  ],
+  "intermediate": "minecraft:air",
+  "min-building-level": 5,
+  "result": {
+    "id": "tfc:metal/axe_head/black_steel"
+  },
+  "tool": "minecolonies_tfc_compat:hammer"
+}

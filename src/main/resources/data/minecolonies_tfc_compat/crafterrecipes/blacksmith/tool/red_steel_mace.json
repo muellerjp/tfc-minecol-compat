@@ -1,0 +1,19 @@
+{
+  "type": "recipe",
+  "crafter": "blacksmith_crafting",
+  "inputs": [
+    {
+      "id": "tfc:metal/mace_head/red_steel",
+      "matchType": "ignore"
+    },
+    {
+      "id": "minecraft:stick",
+      "matchType": "ignore"
+    }
+  ],
+  "intermediate": "minecraft:air",
+  "min-building-level": 5,
+  "result": {
+    "id": "tfc:metal/mace/red_steel"
+  }
+}

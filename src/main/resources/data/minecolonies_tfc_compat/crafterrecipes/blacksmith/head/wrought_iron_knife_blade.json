@@ -1,0 +1,16 @@
+{
+  "type": "recipe",
+  "crafter": "blacksmith_crafting",
+  "inputs": [
+    {
+      "id": "tfc:metal/ingot/wrought_iron",
+      "matchType": "ignore"
+    }
+  ],
+  "intermediate": "minecraft:air",
+  "min-building-level": 3,
+  "result": {
+    "id": "tfc:metal/knife_blade/wrought_iron"
+  },
+  "tool": "minecolonies_tfc_compat:hammer"
+}

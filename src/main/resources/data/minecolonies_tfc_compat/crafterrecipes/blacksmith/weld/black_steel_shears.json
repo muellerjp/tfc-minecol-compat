@@ -1,0 +1,17 @@
+{
+  "type": "recipe",
+  "crafter": "blacksmith_crafting",
+  "inputs": [
+    {
+      "id": "tfc:metal/knife_blade/black_steel",
+      "matchType": "ignore",
+      "count": 2
+    }
+  ],
+  "intermediate": "minecraft:air",
+  "min-building-level": 5,
+  "result": {
+    "id": "tfc:metal/shears/black_steel"
+  },
+  "tool": "minecolonies_tfc_compat:hammer"
+}

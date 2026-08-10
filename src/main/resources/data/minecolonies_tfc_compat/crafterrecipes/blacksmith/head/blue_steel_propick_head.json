@@ -1,0 +1,24 @@
+{
+  "type": "recipe",
+  "crafter": "blacksmith_crafting",
+  "inputs": [
+    {
+      "id": "tfc:metal/ingot/blue_steel",
+      "matchType": "ignore"
+    },
+    {
+      "id": "tfc:metal/hammer/black_steel",
+      "matchType": "ignore"
+    }
+  ],
+  "intermediate": "minecraft:air",
+  "min-building-level": 5,
+  "result": {
+    "id": "tfc:metal/propick_head/blue_steel"
+  },
+  "additional-output": [
+    {
+      "id": "tfc:metal/hammer/black_steel"
+    }
+  ]
+}

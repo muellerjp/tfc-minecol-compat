@@ -22,6 +22,7 @@ public class TFCMineColoniesCompat
     public TFCMineColoniesCompat(final IEventBus modEventBus)
     {
         TFCCompatLootConditions.REGISTER.register(modEventBus);
+        TFCEquipmentTypes.DEFERRED_REGISTER.register(modEventBus);
         modEventBus.addListener(this::onCommonSetup);
     }
 
@@ -57,5 +58,9 @@ public class TFCMineColoniesCompat
         // TFCMaceItem extends MaceItem and also excludes SWORD_SWEEP.
         Compatibility.registerWeaponRecognizer(stack -> stack.getItem() instanceof JavelinItem);
         Compatibility.registerWeaponRecognizer(stack -> stack.getItem() instanceof TFCMaceItem);
+
+        // Ingots and tool heads are not equipment, so Compatibility cannot rank them.
+        // The blacksmith recipe ordering needs a tier for those too.
+        TFCMetalTiers.init();
     }
 }
