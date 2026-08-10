@@ -1,5 +1,10 @@
 ## [unreleased]
 
+### 🚀 Features
+
+- *(blacksmith)* Enabling blacksmith to craft tfc metal tools from ingots
+## [0.1.6] - 2026-07-31
+
 ### 🐛 Bug Fixes
 
 - *(build)* Fixing encoding issues
@@ -8,6 +13,7 @@
 
 ### ⚙️ Miscellaneous Tasks
 
+- *(changelog)* Update CHANGELOG.md
 - *(changelog)* Update CHANGELOG.md
 ## [0.1.5] - 2026-07-01
 
