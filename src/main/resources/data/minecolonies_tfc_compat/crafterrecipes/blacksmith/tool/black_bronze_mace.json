@@ -12,7 +12,7 @@
     }
   ],
   "intermediate": "minecraft:air",
-  "min-building-level": 2,
+  "min-building-level": 1,
   "result": {
     "id": "tfc:metal/mace/black_bronze"
   }
