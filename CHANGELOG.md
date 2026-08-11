@@ -3,6 +3,14 @@
 ### 🚀 Features
 
 - *(blacksmith)* Enabling blacksmith to craft tfc metal tools from ingots
+
+### 🐛 Bug Fixes
+
+- *(blacksmith)* Refitting the recipe requirements to the building levels.
+
+### ⚙️ Miscellaneous Tasks
+
+- *(changelog)* Update CHANGELOG.md
 ## [0.1.6] - 2026-07-31
 
 ### 🐛 Bug Fixes
