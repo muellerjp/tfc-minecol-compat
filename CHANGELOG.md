@@ -1,5 +1,10 @@
 ## [unreleased]
 
+### 🐛 Bug Fixes
+
+- *(dininghall)* Fixing minecolonies foods and making them compatible with tfc foods.
+## [0.1.7] - 2026-08-11
+
 ### 🚀 Features
 
 - *(blacksmith)* Enabling blacksmith to craft tfc metal tools from ingots
@@ -10,6 +15,7 @@
 
 ### ⚙️ Miscellaneous Tasks
 
+- *(changelog)* Update CHANGELOG.md
 - *(changelog)* Update CHANGELOG.md
 ## [0.1.6] - 2026-07-31
 
