@@ -2,7 +2,16 @@
 
 ### 🐛 Bug Fixes
 
+- *(dining hall)* Disabling minecolonies food decay for now, as more testing and balancing is needed
+## [0.1.8] - 2026-08-17
+
+### 🐛 Bug Fixes
+
 - *(dininghall)* Fixing minecolonies foods and making them compatible with tfc foods.
+
+### ⚙️ Miscellaneous Tasks
+
+- *(changelog)* Update CHANGELOG.md
 ## [0.1.7] - 2026-08-11
 
 ### 🚀 Features
