@@ -7,6 +7,6 @@
   "grain": 0.5,
   "vegetables": 1.5,
   "dairy": 1.0,
-  "decay_modifier": 2.5,
+  "decay_modifier": 0.0,
   "edible": true
 }

@@ -6,6 +6,6 @@
   "saturation": 1.0,
   "fruit": 1.0,
   "vegetables": 0.5,
-  "decay_modifier": 5.0,
+  "decay_modifier": 0.0,
   "edible": true
 }

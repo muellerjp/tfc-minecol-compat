@@ -129,6 +129,29 @@ public final class TFCFoodHelper
     }
 
     /**
+     * Marks a stored template stack as transiently non-decaying, the way TFC marks the outputs of
+     * every vanilla recipe after a reload.
+     *
+     * <p>TFC stamps a creation date on every food stack the moment it is constructed, reading the
+     * calendar — which is still 0 during datapack parsing, so anything built at load time is dated
+     * "6 hours after world start" and reads as long expired. The state then latches: the first read
+     * rewrites the date to {@code ROTTEN_FLAG} in place, and the persistent codec does the same on
+     * the encode side, so it ends up in the colony save.</p>
+     *
+     * <p>The flag written here overwrites that, and has a second useful property: TFC converts it
+     * into a genuine current date the moment the stack is copied. A template therefore reads as
+     * fresh, while the item a worker actually produces carries an honest timestamp — which is what
+     * keeps this correct if decay is ever switched back on.</p>
+     */
+    public static void markNonDecaying(final ItemStack stack)
+    {
+        if (!stack.isEmpty())
+        {
+            FoodCapability.setTransientNonDecaying(stack);
+        }
+    }
+
+    /**
      * The saturation multiplier MineColonies applies when a citizen eats this stack, mirroring
      * {@code FoodUtils#getFoodValue}: its own food is worth full value, everything else a quarter.
      * TFC food is not {@code IMinecoloniesFoodItem}, so it keeps the nerf.

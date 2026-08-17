@@ -6,6 +6,6 @@
   "saturation": 2.0,
   "water": 5.0,
   "grain": 1.5,
-  "decay_modifier": 4.5,
+  "decay_modifier": 0.0,
   "edible": true
 }

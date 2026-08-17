@@ -5,6 +5,6 @@
   "hunger": 7,
   "saturation": 2.0,
   "vegetables": 2.0,
-  "decay_modifier": 2.5,
+  "decay_modifier": 0.0,
   "edible": true
 }

@@ -7,6 +7,6 @@
   "water": 5.0,
   "vegetables": 1.0,
   "protein": 2.5,
-  "decay_modifier": 4.5,
+  "decay_modifier": 0.0,
   "edible": true
 }
