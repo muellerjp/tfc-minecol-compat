@@ -5,6 +5,9 @@
   "mixins": [
     "ItemStackUtilsMixin",
     "FoodUtilsMixin",
+    "CompatibilityManagerMixin",
+    "FoodRequestableMixin",
+    "InventoryUtilsMixin",
     "TreeMixin",
     "BuildingFishermanMixin",
     "EntityAIWorkFishermanMixin",

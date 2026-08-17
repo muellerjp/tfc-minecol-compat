@@ -1,0 +1,11 @@
+{
+  "ingredient": {
+    "item": "minecolonies:pita_hummus"
+  },
+  "hunger": 9,
+  "saturation": 3.0,
+  "grain": 1.5,
+  "vegetables": 1.5,
+  "decay_modifier": 2.5,
+  "edible": true
+}

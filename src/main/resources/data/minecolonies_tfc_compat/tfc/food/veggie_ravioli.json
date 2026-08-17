@@ -1,0 +1,11 @@
+{
+  "ingredient": {
+    "item": "minecolonies:veggie_ravioli"
+  },
+  "hunger": 5,
+  "saturation": 1.0,
+  "grain": 1.0,
+  "vegetables": 1.5,
+  "decay_modifier": 3.0,
+  "edible": true
+}

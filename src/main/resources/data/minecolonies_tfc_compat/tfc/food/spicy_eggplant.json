@@ -1,0 +1,10 @@
+{
+  "ingredient": {
+    "item": "minecolonies:spicy_eggplant"
+  },
+  "hunger": 9,
+  "saturation": 3.0,
+  "vegetables": 2.5,
+  "decay_modifier": 2.5,
+  "edible": true
+}

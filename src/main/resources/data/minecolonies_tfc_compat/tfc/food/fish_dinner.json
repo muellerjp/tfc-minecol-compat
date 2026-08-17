@@ -1,0 +1,11 @@
+{
+  "ingredient": {
+    "item": "minecolonies:fish_dinner"
+  },
+  "hunger": 9,
+  "saturation": 3.0,
+  "vegetables": 1.0,
+  "protein": 2.5,
+  "decay_modifier": 2.25,
+  "edible": true
+}

@@ -1,0 +1,10 @@
+{
+  "ingredient": {
+    "item": "minecolonies:yogurt"
+  },
+  "hunger": 5,
+  "saturation": 1.0,
+  "dairy": 2.5,
+  "decay_modifier": 3.0,
+  "edible": true
+}

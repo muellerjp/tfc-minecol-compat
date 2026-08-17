@@ -1,0 +1,11 @@
+{
+  "ingredient": {
+    "item": "minecolonies:fish_n_chips"
+  },
+  "hunger": 7,
+  "saturation": 2.0,
+  "vegetables": 1.0,
+  "protein": 2.0,
+  "decay_modifier": 2.25,
+  "edible": true
+}

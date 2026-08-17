@@ -1,0 +1,10 @@
+{
+  "ingredient": {
+    "item": "minecolonies:polenta"
+  },
+  "hunger": 5,
+  "saturation": 1.0,
+  "grain": 2.0,
+  "decay_modifier": 1.0,
+  "edible": true
+}

@@ -1,0 +1,10 @@
+{
+  "ingredient": {
+    "item": "minecolonies:baked_salmon"
+  },
+  "hunger": 7,
+  "saturation": 2.0,
+  "protein": 2.5,
+  "decay_modifier": 2.25,
+  "edible": true
+}

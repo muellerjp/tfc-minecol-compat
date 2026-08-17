@@ -1,0 +1,12 @@
+{
+  "ingredient": {
+    "item": "minecolonies:mushroom_pizza"
+  },
+  "hunger": 9,
+  "saturation": 3.0,
+  "grain": 1.5,
+  "vegetables": 1.5,
+  "dairy": 1.0,
+  "decay_modifier": 2.5,
+  "edible": true
+}

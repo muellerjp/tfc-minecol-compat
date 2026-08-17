@@ -1,0 +1,11 @@
+{
+  "ingredient": {
+    "item": "minecolonies:veggie_soup"
+  },
+  "hunger": 7,
+  "saturation": 2.0,
+  "water": 5.0,
+  "vegetables": 2.0,
+  "decay_modifier": 4.5,
+  "edible": true
+}

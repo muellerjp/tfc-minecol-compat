@@ -1,0 +1,12 @@
+{
+  "ingredient": {
+    "item": "minecolonies:stuffed_pita"
+  },
+  "hunger": 9,
+  "saturation": 3.0,
+  "grain": 1.5,
+  "vegetables": 1.5,
+  "protein": 0.5,
+  "decay_modifier": 2.5,
+  "edible": true
+}

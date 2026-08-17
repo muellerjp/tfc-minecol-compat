@@ -1,0 +1,10 @@
+{
+  "ingredient": {
+    "item": "minecolonies:rice"
+  },
+  "hunger": 1,
+  "saturation": 0.5,
+  "grain": 1.0,
+  "decay_modifier": 0.25,
+  "edible": true
+}

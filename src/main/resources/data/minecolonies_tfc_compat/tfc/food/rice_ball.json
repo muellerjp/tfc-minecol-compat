@@ -1,0 +1,10 @@
+{
+  "ingredient": {
+    "item": "minecolonies:rice_ball"
+  },
+  "hunger": 7,
+  "saturation": 2.0,
+  "grain": 2.0,
+  "decay_modifier": 1.0,
+  "edible": true
+}

@@ -1,0 +1,12 @@
+{
+  "ingredient": {
+    "item": "minecolonies:lamb_stew"
+  },
+  "hunger": 9,
+  "saturation": 3.0,
+  "water": 5.0,
+  "vegetables": 1.0,
+  "protein": 2.5,
+  "decay_modifier": 4.5,
+  "edible": true
+}

@@ -1,0 +1,11 @@
+{
+  "ingredient": {
+    "item": "minecolonies:soybean"
+  },
+  "hunger": 1,
+  "saturation": 0.5,
+  "vegetables": 0.5,
+  "protein": 0.5,
+  "decay_modifier": 0.25,
+  "edible": true
+}

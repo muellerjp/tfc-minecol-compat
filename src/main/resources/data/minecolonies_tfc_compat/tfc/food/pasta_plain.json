@@ -1,0 +1,10 @@
+{
+  "ingredient": {
+    "item": "minecolonies:pasta_plain"
+  },
+  "hunger": 7,
+  "saturation": 2.0,
+  "grain": 2.0,
+  "decay_modifier": 3.0,
+  "edible": true
+}

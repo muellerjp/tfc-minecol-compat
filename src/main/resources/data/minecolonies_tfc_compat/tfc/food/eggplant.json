@@ -1,0 +1,10 @@
+{
+  "ingredient": {
+    "item": "minecolonies:eggplant"
+  },
+  "hunger": 1,
+  "saturation": 0.5,
+  "vegetables": 1.0,
+  "decay_modifier": 0.5,
+  "edible": true
+}

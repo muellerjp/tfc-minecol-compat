@@ -1,0 +1,11 @@
+{
+  "ingredient": {
+    "item": "minecolonies:steak_dinner"
+  },
+  "hunger": 9,
+  "saturation": 3.0,
+  "vegetables": 1.0,
+  "protein": 3.0,
+  "decay_modifier": 1.5,
+  "edible": true
+}

@@ -1,0 +1,11 @@
+{
+  "ingredient": {
+    "item": "minecolonies:pasta_tomato"
+  },
+  "hunger": 7,
+  "saturation": 2.0,
+  "grain": 1.5,
+  "vegetables": 1.0,
+  "decay_modifier": 3.0,
+  "edible": true
+}

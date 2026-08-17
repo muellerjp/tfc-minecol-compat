@@ -1,0 +1,11 @@
+{
+  "ingredient": {
+    "item": "minecolonies:sushi_roll"
+  },
+  "hunger": 9,
+  "saturation": 3.0,
+  "grain": 1.5,
+  "protein": 2.0,
+  "decay_modifier": 2.25,
+  "edible": true
+}

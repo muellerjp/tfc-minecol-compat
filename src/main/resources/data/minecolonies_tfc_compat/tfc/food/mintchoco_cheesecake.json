@@ -1,0 +1,11 @@
+{
+  "ingredient": {
+    "item": "minecolonies:mintchoco_cheesecake"
+  },
+  "hunger": 9,
+  "saturation": 3.0,
+  "grain": 1.0,
+  "dairy": 2.0,
+  "decay_modifier": 2.5,
+  "edible": true
+}

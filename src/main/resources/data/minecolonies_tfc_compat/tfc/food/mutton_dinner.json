@@ -1,0 +1,11 @@
+{
+  "ingredient": {
+    "item": "minecolonies:mutton_dinner"
+  },
+  "hunger": 7,
+  "saturation": 3.0,
+  "vegetables": 0.5,
+  "protein": 2.5,
+  "decay_modifier": 1.5,
+  "edible": true
+}

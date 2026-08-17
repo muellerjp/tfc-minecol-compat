@@ -1,0 +1,8 @@
+{
+  "remove": [
+    "minecolonies:cabochis",
+    "minecolonies:lamb_stew",
+    "minecolonies:pottage"
+  ],
+  "values": []
+}
